@@ -11,47 +11,16 @@ const routes: Routes = [
     children:[     
       {
         path: 'discover',
-        children:[
-          {
-            path: '',
-            loadChildren: ()=> import('./discover/discover.module').then( m => m.DiscoverPageModule)
-          },
-          {
-            path: ':placeId',
-            loadChildren: ()=> import('./discover/place-detail/place-detail.module').then( m => m.PlaceDetailPageModule)
-          }
-        ]
+        loadChildren: ()=> import('./discover/discover.module').then( m => m.DiscoverPageModule)
       },
       {
         path: 'offers',
-        children:[
-          {
-            path: '',
-            loadChildren: () => import('./offers/offers.module').then( m => m.OffersPageModule)
-          },
-          {
-            path:'new',
-            loadChildren: () => import('./offers/new-offer/new-offer.module').then( m => m.NewOfferPageModule)
-          },
-          {
-            path:'edit/:offerId',
-            loadChildren: () => import('./offers/edit-offer/edit-offer.module').then( m => m.EditOfferPageModule)
-          },
-          {
-            path:':placeId',
-            loadChildren: () => import('./offers/offer-booking/offer-booking.module').then( m => m.OfferBookingPageModule)
-          }
-        ]
+        loadChildren: () => import('./offers/offers.module').then( m => m.OffersPageModule)
       },
-      {
-        path: '',
-        redirectTo: '/places/tabs/discover',
-        pathMatch: 'full'
-      }
-    ]
+      ]
   },
   {
-    path:'',
+    path: '',
     redirectTo: '/places/tabs/discover',
     pathMatch: 'full'
   }

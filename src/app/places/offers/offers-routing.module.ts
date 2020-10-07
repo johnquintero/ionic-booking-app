@@ -9,22 +9,21 @@ const routes: Routes = [
     component: OffersPage
   },
   {
-    path: 'new-offer',
+    path: 'new',
     loadChildren: () => import('./new-offer/new-offer.module').then( m => m.NewOfferPageModule)
   },
   {
-    path: 'edit-offer',
+    path: 'edit/:placeId',
     loadChildren: () => import('./edit-offer/edit-offer.module').then( m => m.EditOfferPageModule)
   },
   {
-    path: 'offer-booking',
+    path: ':placeId',
     loadChildren: () => import('./offer-booking/offer-booking.module').then( m => m.OfferBookingPageModule)
   }
 ];
 
 @NgModule({
-  //imports: [RouterModule.forChild(routes)],
-  imports: [RouterModule],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class OffersPageRoutingModule {}
