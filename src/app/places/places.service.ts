@@ -13,7 +13,9 @@ export class PlacesService {
   ];
   constructor() { }
 
+  //Esto es una propiedad
   get places(){
+    //Retorno una copia del arreglo.
     return [...this._places];
   }
 }
