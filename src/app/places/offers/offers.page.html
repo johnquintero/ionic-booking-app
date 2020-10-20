@@ -1,6 +1,14 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="m1"></ion-menu-button>
+    </ion-buttons>
     <ion-title>Offers</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button color="primary" defaultHref="/places/tabs/offers" [routerLink]="['new']">
+        <ion-icon name ="add-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -25,7 +33,7 @@
           <ion-button
             fill="clear"
             color="primary"
-            [routerLink]="['/','places','tabs','offers','offers[0].id']"
+            [routerLink]="['/','places','tabs','offers',offers[0].id]"
             class="ion-text-lowercase">
             More..
           </ion-button>

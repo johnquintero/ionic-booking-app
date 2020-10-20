@@ -17,4 +17,8 @@ export class OffersService {
   get Offers(){
     return [...this._offers];
   }
+
+  getOffer(id : string): Offer{
+    return {...this._offers.find(o => o.id === id)};
+  }
 }

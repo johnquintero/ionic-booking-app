@@ -18,4 +18,8 @@ export class PlacesService {
     //Retorno una copia del arreglo.
     return [...this._places];
   }
+
+  getPlace(id : string): Place {
+    return {...this._places.find(p => p.id===id)};
+  }
 }
