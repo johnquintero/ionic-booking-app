@@ -32,9 +32,16 @@ export class PlaceDetailPage implements OnInit {
   bookModal(){
     this._modalCtrl.create({
       component : CreateBookingComponent,
+      componentProps : {selectedPlace : this.place},
       cssClass: 'my-custom-modal-css'
-    }).then(m => m.present());
-    
+    }).then(m => {
+      m.present();
+      return m.onDidDismiss();
+    }).then(data => {
+      console.log(data);
+      if(data.role==='sucess'){
+        console.log('Works!');
+      }
+    });
   }
-
 }
