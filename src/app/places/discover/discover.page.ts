@@ -1,3 +1,4 @@
+import { SlicePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Place } from '../places-model';
 import { PlacesService } from '../places.service';
@@ -10,12 +11,14 @@ import { PlacesService } from '../places.service';
 export class DiscoverPage implements OnInit {
 
   loadedPlces : Place[] =[];
+  listedLoadedPlaces : Place[];
 
   constructor(private servicePlaces : PlacesService) {
    }
 
   ngOnInit() {
       this.loadedPlces = this.servicePlaces.places;
+      this.listedLoadedPlaces = this.loadedPlces.slice(1);
   }
 
 
