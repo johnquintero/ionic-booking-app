@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ModalController, NavController } from '@ionic/angular';
+import { ActionSheetController, ModalController, NavController } from '@ionic/angular';
 import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-booking.component';
 import { Place } from '../../places-model';
 import { PlacesService } from '../../places.service';
@@ -16,7 +16,8 @@ export class PlaceDetailPage implements OnInit {
   constructor(private _activatedRouter :ActivatedRoute,
               private _placeService : PlacesService,
               private _navCtrl : NavController,
-              private _modalCtrl : ModalController) { }
+              private _modalCtrl : ModalController,
+              public _actionCtrl : ActionSheetController) { }
 
   ngOnInit() {
     //Se suscribe al paramMpa para que este siempre observando los cambios de los parametros sin importar que este en el OnInit este se quedara ejecutando.
@@ -29,7 +30,36 @@ export class PlaceDetailPage implements OnInit {
     });
  
   }
-  bookModal(){
+ 
+
+
+  async presentActionSheet(){
+    const actionSheet = await this._actionCtrl.create({
+      header:'Options',
+      buttons: [
+        {
+          text: "Select Date",
+          handler : () => {
+            this.openBookModal("select");
+          }
+        },
+        {
+          text: "Random Date",
+          handler : () => {
+            this.openBookModal("random");
+          }
+        },
+        {
+          text: "Cancel",
+          role: "cancel"
+        }
+      ]
+    });
+    await actionSheet.present();
+  }
+
+  openBookModal(mode : 'select' | 'random'){
+    console.log(mode);
     this._modalCtrl.create({
       component : CreateBookingComponent,
       componentProps : {selectedPlace : this.place},

@@ -1,5 +1,6 @@
 import { SlicePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { SegmentChangeEventDetail } from '@ionic/core';
 import { Place } from '../places-model';
 import { PlacesService } from '../places.service';
 
@@ -19,6 +20,10 @@ export class DiscoverPage implements OnInit {
   ngOnInit() {
       this.loadedPlces = this.servicePlaces.places;
       this.listedLoadedPlaces = this.loadedPlces.slice(1);
+  }
+
+  segmentChanged(event : CustomEvent<SegmentChangeEventDetail>){
+    console.log(event.detail);
   }
 
 
