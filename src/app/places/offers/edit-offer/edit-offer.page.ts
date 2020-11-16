@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Offer } from '../offers-model';
@@ -12,9 +13,12 @@ import { OffersService } from '../offers.service';
 export class EditOfferPage implements OnInit {
 
   offer : Offer;
+  editForm : FormGroup
 
-  constructor(private _activeRoute : ActivatedRoute, private _offersService : OffersService,
-              private _navCtrl : NavController) { }
+  constructor(private _activeRoute : ActivatedRoute, 
+              private _offersService : OffersService,
+              private _navCtrl : NavController,
+              private _fb : FormBuilder) { }
 
   ngOnInit() {
     this._activeRoute.paramMap.subscribe(paramMap => {
@@ -24,9 +28,21 @@ export class EditOfferPage implements OnInit {
         return;
       }
       this.offer = this._offersService.getOffer(paramMap.get('placeId'));
+      this.editForm = this._fb.group({
+        title : [this.offer.title, Validators.required],
+        description : [this.offer.description, Validators.required]
+      });
     },
     err => console.log(`Se presento un error : ${err}`)
     )
+  }
+
+  onEditOffer(){
+    if(!this.editForm.valid){
+      return;
+    } else {
+      console.log(this.editForm);
+    }
   }
 
 }
